@@ -8,7 +8,7 @@ void show_all(List <Student> *p_list);
 int main(){
   List <Student> p_list;
 
-  std::string alunos[] = {"Rafael", "Carlos", "Lucas", "Carla", "Julia", "Penelope"};
+  std::string alunos[] = {"Rafael", "Andreia", "Carlos", "Reginaldo", "Zilma", "Zilma"};
   int idades[] = {27, 32, 43, 12, 34, 54};
 
   //test FIFO
@@ -38,6 +38,31 @@ int main(){
     p_list.pop();
     show_all(&p_list);
   }
+
+  //test SORT
+  std::cout << "Testing SORT ..." << "\n";
+
+  for (int i = 0; i<6 ; i++) {
+    Student* new_student = (Student*) malloc(sizeof(Student));
+    new (new_student) Student(alunos[i], idades[i]);
+    p_list.push(new_student);
+  }
+  show_all(&p_list);
+
+  std::cout << "Order by name" << "\n";
+  auto verify = [] (Student *first, Student *second) -> bool {
+    return first->name > second->name; 
+  };
+  p_list.sort(verify);
+  show_all(&p_list);
+
+  std::cout << "Order by year" << "\n";
+  auto verifyYear = [] (Student *first, Student *second) -> bool {
+    return first->year > second->year; 
+  };
+  p_list.sort(verifyYear);
+  show_all(&p_list);
+  
 
 };
 

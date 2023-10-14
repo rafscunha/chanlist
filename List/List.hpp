@@ -10,6 +10,7 @@ class List{
   Node<T>* first = NULL;
   Node<T>* last = NULL;
   Node<T>* getNode(int n);
+  void change(Node<T>* first, Node<T>* second);
 
   public:
   List();
@@ -21,6 +22,7 @@ class List{
   void pop();
   void shift();
   int unshift(T* element);
+  void sort(std::function<bool(T*, T*)> func);
 };
 
 template <class T>
@@ -149,6 +151,26 @@ int List<T>::unshift(T* element){
   }
   this->first = p_node;
 
+}
+
+template <class T>
+void List<T>::change(Node<T>* first, Node<T>* second){
+  T* flag = first->data;
+  first->data = second->data;
+  second->data = flag;
+}
+
+template <class T>
+void List<T>::sort(std::function<bool(T*, T*)> func){
+  if (this->first != NULL){
+    Node<T>* p_node_now = this->first;
+    while (p_node_now != this->last){
+      if (func(p_node_now->data, p_node_now->getNext()->data)){
+        this->change(p_node_now, p_node_now->getNext());
+      }
+      p_node_now = p_node_now->getNext();
+    }
+  }
 }
 
 #endif /* LIST_hpp */
