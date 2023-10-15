@@ -57,12 +57,15 @@ int main(){
   show_all(&p_list);
 
   std::cout << "Order by year" << "\n";
-  auto verifyYear = [] (Student *first, Student *second) -> bool {
-    return first->year > second->year; 
-  };
-  p_list.sort(verifyYear);
+  p_list.sort(
+    [] (Student *first, Student *second) -> bool { return first->year > second->year; }
+  );
   show_all(&p_list);
-  
+
+  Student *studentFound =  p_list.find(
+    [] (Student *c) -> bool { return c->name == "Rafael"; }
+  );
+  std::cout << "Found -> name:" << studentFound->name << " years: " << studentFound->year << '\n';
 
 };
 

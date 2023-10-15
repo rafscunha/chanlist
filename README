@@ -1,1 +1,9 @@
-rm -r build | make
+# Double Chain List
+
+This repository is a part of review about data structs
+Here i implemented the double chain list, and the methods to provide the FIFO and LIFO, improvement the original code to use template .
+I also implemented a simples sort algorithm and a find method, passing a lambda function to compare the values, same works in JavaScript with Array.find and Array.sort
+
+### To run:
+> rm -r build | make
+> ./program

@@ -23,6 +23,7 @@ class List{
   void shift();
   int unshift(T* element);
   void sort(std::function<bool(T*, T*)> func);
+  T* find(std::function<bool(T*)> func);
 };
 
 template <class T>
@@ -170,6 +171,21 @@ void List<T>::sort(std::function<bool(T*, T*)> func){
       }
       p_node_now = p_node_now->getNext();
     }
+  }
+}
+
+template <class T>
+T* List<T>::find(std::function<bool(T*)> func){
+  if (this->first != NULL){
+    Node<T>* p_node_now = this->first;
+    while (p_node_now != NULL){
+      if (func(p_node_now->data)){
+        return p_node_now->data;
+      }
+      p_node_now = p_node_now->getNext();
+    }
+  }else {
+    return NULL;
   }
 }
 
